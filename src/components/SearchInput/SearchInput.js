@@ -1,22 +1,31 @@
 import { Input } from "antd";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { debounce } from "lodash";
 
 const SearchInput = ({ allFetchMovies }) => {
   const [value, setValue] = useState("");
 
-  const handleInput = (text) => {
-    setValue(text);
-    allFetchMovies(text);
+  const handleInput = (e) => {
+    const text = e.target.value
+    console.log(e);
+    if(value.trim()) return
+      setValue(text);
+      allFetchMovies(text);
   };
 
-  const handleInputDebounce = debounce(handleInput, 500);
+
+  
+  const debouncedChangeHandler = useMemo(() => {
+    return debounce(handleInput, 300);
+  }, []);
+
+  // const handleInputDebounce = debounce(handleInput, 1000);
 
   return (
     <>
       <Input
         maxLength={50}
-        onChange={(e) => handleInputDebounce(e.target.value)}
+        onChange={debouncedChangeHandler}
         value={value}
       />
     </>
