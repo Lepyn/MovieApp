@@ -4,7 +4,7 @@ import MainHeader from "./components/MainHeader/MainHeader";
 import "./style";
 // import { Menu } from "antd";
 import { useEffect, useState } from "react";
-import movieDataBase from "./Services/movieDataBase";
+
 
 const App = () => {
   const [selectedPage, setSelectedPage] = useState("search");

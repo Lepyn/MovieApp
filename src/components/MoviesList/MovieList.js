@@ -15,6 +15,18 @@ const MovieList = () => {
   const [isEmpty, setIsEmpty] = useState(true);
   const [datas, setDatas] = useState([]);
 
+  const guestToken = async () => {
+    const guestKey = await movieDataBase.get(
+      "/authentication/guest_session/new"
+    );
+    window.localStorage.setItem(
+      "guestKey",
+    `${guestKey.data.guest_session_id}`
+    );
+  };
+
+ 
+
   const allFetchMovies = async (text = "return") => {
     try {
       const { data } = await movieDataBase.get("/search/movie", {
@@ -28,7 +40,7 @@ const MovieList = () => {
         setIsEmpty(true);
         setLoading(false);
         setAllFilms(data.results);
- 
+
         setDatas(data);
       }
     } catch (e) {
@@ -38,6 +50,7 @@ const MovieList = () => {
 
   useEffect(() => {
     allFetchMovies();
+    guestToken();
   }, []);
 
   return (

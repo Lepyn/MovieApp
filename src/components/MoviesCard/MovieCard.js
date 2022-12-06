@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import Rating from "../Rating/Rating";
 import Loading from "../Loading/Loading";
-// import Stars from "../Stars/Stars";
-import { Rate } from "antd";
+
 import RatedList from "../RatedList/RatedList";
 
 const Сard = ({
