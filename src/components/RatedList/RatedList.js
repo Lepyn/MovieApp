@@ -14,7 +14,7 @@ const RatedList = ({ id }) => {
           Content_Type: "application/json;charset=utf-8",
         },
         params: {
-          guest_session_id: window.localStorage.getItem('guestToken'),
+          guest_session_id: window.localStorage.getItem('guest'),
           movie_id: id, 
         },
         body: {
