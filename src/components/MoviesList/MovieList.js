@@ -1,68 +1,68 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import movieDataBase from "../../Services/movieDataBase";
 import MovieCard from "../MoviesCard/MovieCard";
 import SearchInput from "../SearchInput/SearchInput";
 import Loading from "../Loading/Loading";
 import NoInternetLoading from "../NoInternetLoading/NoInternetLoading";
 import Cat from "../Cat/Cat";
+import Page from "../Page/Page";
+
+// import Rated from '../Rated/Rated'
 
 const MovieList = () => {
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setLoading] = useState(true);
   const [allFilms, setAllFilms] = useState([]);
-  const [keyDownInput, setKeyDown] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+  const [isEmpty, setIsEmpty] = useState(true);
+  const [datas, setDatas] = useState([]);
 
-  const allFetchMovies = async (text) => {
-    const { data } = await movieDataBase.get("/search/movie", {
-      params: {
-        query: text,
-      },
-    });
-    setKeyDown(true);
-    setIsEmpty(true);
-    setAllFilms(data.results);
-  };
+  const allFetchMovies = async (text = "return") => {
+    try {
+      const { data } = await movieDataBase.get("/search/movie", {
+        params: {
+          query: text,
+        },
+      });
 
-  const fetchMovies = async () => {
-    const { data } = await movieDataBase.get("/movie/popular");
-    setIsEmpty(true)
-    setMovies(data.results);
-    setLoading(false);
+      if (data.results.length === 0) return setIsEmpty(false);
+      else {
+        setIsEmpty(true);
+        setLoading(false);
+        setAllFilms(data.results);
+ 
+        setDatas(data);
+      }
+    } catch (e) {
+      console.log(`Ошибка ${e}`);
+    }
   };
 
   useEffect(() => {
-    fetchMovies();
+    allFetchMovies();
   }, []);
 
   return (
     <>
       <NoInternetLoading />
-       
       <SearchInput allFetchMovies={allFetchMovies} />
       {isLoading ? (
         <Loading />
       ) : (
-        <> 
-        
-        <ul className="movies">
-           
-          {keyDownInput && (
+        <>
+          {isEmpty && (
             <>
-              {allFilms.map((searchMovie, index) => {
-                return <MovieCard key={index} {...searchMovie} />;
-              })}
+              <ul className="movies">
+                <>
+                  {allFilms.map((searchMovie, index) => {
+                    return <MovieCard key={index} {...searchMovie} />;
+                  })}
+                </>
+              </ul>
+              <Page datas={datas} allFetchMovies={allFetchMovies} />
             </>
           )}
-          {!keyDownInput && (
-            <>
-              {movies.map((movie, index) => {
-                return <MovieCard key={index} {...movie} />;
-              })}
-            </>
-          )}  {isEmpty && <Cat />}
-        </ul>
-      </>)}
+          {!isEmpty && <Cat />}
+        </>
+      )}
     </>
   );
 };

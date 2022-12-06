@@ -116,3 +116,22 @@
   flex-direction: row;
   align-items: center;
 }
+
+.stars {
+  width: 105%;
+  height: 50px;
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  bottom: 0;
+  position: absolute;
+  width: 270px;
+}
+
+.button-choise { 
+  display: flex;
+  justify-content: center;
+  margin-bottom: 7px;
+  /* height: 30px; */
+}
