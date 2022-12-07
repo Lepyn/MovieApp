@@ -7,8 +7,6 @@ import NoInternetLoading from "../NoInternetLoading/NoInternetLoading";
 import Cat from "../Cat/Cat";
 import Page from "../Page/Page";
 
-// import Rated from '../Rated/Rated'
-
 const MovieList = () => {
   const [allFilms, setAllFilms] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -16,29 +14,32 @@ const MovieList = () => {
   const [datas, setDatas] = useState([]);
 
   const RequestToken = async () => {
+    if (localStorage.getItem("request_token")) return;
     const createRequestToken = await movieDataBase.get(
       "/authentication/token/new"
     );
-    localStorage.setItem("create", `${createRequestToken.data.request_token}`);
+    localStorage.setItem(
+      "request_token",
+      `${createRequestToken.data.request_token}`
+    );
   };
 
   const createSessionId = async () => {
+    if (localStorage.getItem("session")) return;
+
     const sessionId = await movieDataBase.post("/authentication/session/new", {
-      body: {
-        request_token: localStorage.getItem("create"),
-      },
+      request_token: localStorage.getItem("request_token"),
     });
-    // console.log(createSessionId);
     localStorage.setItem("session", `${sessionId.data.session_id}`);
   };
 
   const guestToken = async () => {
+    if (localStorage.getItem("guest")) return;
     const guestKey = await movieDataBase.get(
       "/authentication/guest_session/new"
     );
     localStorage.setItem("guest", `${guestKey.data.guest_session_id}`);
   };
-
   const allFetchMovies = async (text = "return") => {
     try {
       const { data } = await movieDataBase.get("/search/movie", {
@@ -46,13 +47,11 @@ const MovieList = () => {
           query: text,
         },
       });
-
       if (data.results.length === 0) return setIsEmpty(false);
       else {
         setIsEmpty(true);
         setLoading(false);
         setAllFilms(data.results);
-
         setDatas(data);
       }
     } catch (e) {
@@ -62,16 +61,13 @@ const MovieList = () => {
 
   const createAllTokens = async () => {
     await RequestToken();
-    await createSessionId();
     await guestToken();
+    await createSessionId();
   };
 
   useEffect(() => {
     allFetchMovies();
     createAllTokens();
-    // RequestToken();
-    // sessionId();
-    // guestToken();
   }, []);
 
   return (
