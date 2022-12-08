@@ -10,9 +10,9 @@ const {total_results} = datas
     allFetchMovies(numbers)
  }
    return ( 
-    <> 
-       <Pagination defaultCurrent={1} total={total_results} onChange={handlePaginate} current={current} className="paginate"/>
-    </>
+    <div className="paginate "> 
+       <Pagination showSizeChanger={false} defaultPageSize={20} defaultCurrent={1} total={total_results} onChange={handlePaginate} current={current} className="paginate"/>
+    </div>
    )
 };
 

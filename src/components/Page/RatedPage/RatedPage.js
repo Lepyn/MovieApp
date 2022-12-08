@@ -1,19 +1,33 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../../MoviesCard/MovieCard";
-import { getRatedMovies } from "../../../Services/RatedPageService";
+import movieDataBase from "../../../Services/movieDataBase";
 import NoInternetLoading from "../../NoInternetLoading/NoInternetLoading";
 import Loading from "../../Loading/Loading";
 
-function RatedPage() {
+function RatedPage({ value }) {
+  console.log(value);
   const [ratedList, setRatedList] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [starrate, setStar] = useState(0);
 
-  useEffect(() => {
-    getRatedMovies().then((el) => {
-      setRatedList(el.data.results);
+  let localgest = localStorage.getItem("guest");
+  const res = movieDataBase.get(`/guest_session/${localgest}/rated/movies`);
+
+  const result = () => {
+    res.then((el) => {
+      setStar(el.data.results.map((el) => el.rating));
+      console.log(el);
+      const str = JSON.stringify(el.data.results);
+      localStorage.setItem("str", str);
+      setRatedList(el.data.results, starrate);
       setLoading(false);
     });
+  };
+
+  useEffect(() => {
+    result();
   }, []);
+
   return (
     <>
       <NoInternetLoading />
@@ -21,6 +35,7 @@ function RatedPage() {
         <Loading />
       ) : (
         <>
+        <></>
           <ul className="movies">
             <>
               {ratedList.map((searchMovie, index) => {
@@ -28,11 +43,10 @@ function RatedPage() {
               })}
             </>
           </ul>
-          {/*<Page datas={datas} allFetchMovies={allFetchMovies} />*/}
+          
         </>
       )}
     </>
   );
 }
-
 export default RatedPage;
