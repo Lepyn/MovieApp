@@ -44,7 +44,7 @@
   margin-right: 9px;
   font-size: 12px;
   line-height: 22px;
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   text-align: center;
   vertical-align: middle;
@@ -91,65 +91,63 @@
 }
 
 @media screen and (max-width: 720px) {
+  .movies__card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    height: 245px;
+    display: block;
+  }
 
-.movies__card {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 5px 10px;
-  height: 245px;
-  display: block;
-}
+  .movies__img {
+    width: 60px;
+    height: 91px;
+    display: inline;
+    vertical-align: top;
+    text-align: none;
+    align-self: none;
+  }
+  .movies__description {
+    display: inline-block;
+    position: static;
+    padding: 0;
+    padding-left: 13px;
+    width: 256px;
+  }
 
-.movies__img {
-  width: 60px;
-  height: 91px;
-  display: inline;
-  vertical-align: top;
-  text-align: none;
-  align-self: none;
-}
-.movies__description {
-  display: inline-block;
-  position: static;
-  padding: 0;
-  padding-left: 13px;
-  width: 256px;
-}
+  .movies__name {
+    width: 100%;
+    font-size: 16px;
+  }
 
-.movies__name {
-  width: 100%;
-  font-size: 16px;
-}
+  .movies__rate {
+    margin: 0;
+    top: 5px;
+    right: 8px;
+  }
 
-.movies__rate {
-  margin: 0;
-  top: 5px;
-  right: 8px;
-}
+  .movies__intro {
+    padding-top: 22px;
+    position: relative;
+    left: -73px;
+    width: 368px;
+  }
 
-.movies__intro {
-  padding-top: 22px;
-  position: relative;
-  left: -73px;
-  width: 368px;
-}
-
-.movies__jenre {
-  display: inline-block;
-  font-style: bold;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 1.7;
-  width: max-content;
-  padding: 1.5px;
-  text-align: center;
-  height: 18px;
-  vertical-align: middle;
-  margin-right: 8px;
-  color: rgba(0, 0, 0, 0.65);
-  background: #fafafa;
-  border: 1px solid #d9d9d9;
-  border-radius: 2px;
-}
-
+  .movies__jenre {
+    display: inline-block;
+    font-style: bold;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.7;
+    width: max-content;
+    padding: 1.5px;
+    text-align: center;
+    height: 18px;
+    vertical-align: middle;
+    margin-right: 8px;
+    color: rgba(0, 0, 0, 0.65);
+    background: #fafafa;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+  }
 }
