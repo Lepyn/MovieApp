@@ -5,7 +5,7 @@ import SearchInput from "../SearchInput/SearchInput";
 import Loading from "../Loading/Loading";
 import NoInternetLoading from "../NoInternetLoading/NoInternetLoading";
 import Cat from "../Cat/Cat";
-import Page from "../Page/Pagination";
+import Pagination from '../Page/Pagination/Pagination'
 
 const MovieList = () => {
   const [allFilms, setAllFilms] = useState([]);
@@ -62,7 +62,7 @@ const MovieList = () => {
                   })}
                 </>
               </ul>
-              <Page datas={datas} allFetchMovies={allFetchMovies} />
+              <Pagination datas={datas} allFetchMovies={allFetchMovies} />
             </>
           )}
           {!isEmpty && <Cat />}
@@ -71,4 +71,5 @@ const MovieList = () => {
     </>
   );
 };
+
 export default MovieList;

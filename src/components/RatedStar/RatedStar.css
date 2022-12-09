@@ -1,0 +1,12 @@
+.stars {
+    width: 105%;
+    height: 60px;
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    bottom: 0;
+    font-size: 18px;
+  }
+
+ 

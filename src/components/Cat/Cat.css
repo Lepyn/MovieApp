@@ -1,0 +1,17 @@
+.cat-description {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+@media screen and (max-width: 720px) {
+
+.cat-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cat-description img {
+    width: 400px;
+  }
+}

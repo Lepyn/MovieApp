@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import Rating from "../Rating/Rating";
 import Loading from "../Loading/Loading";
-import RatedList from "../RatedList/RatedList";
+import RatedList from "../RatedStar/RatedStar";
 import Context from "../../Context/Context";
 
 const Сard = ({
@@ -15,7 +15,6 @@ const Сard = ({
   id,
   genre_ids,
 }) => {
-  console.log(genre_ids);
   const showImage = () => {
     if (poster_path === null)
       return "https://cdn.fishki.net/upload/post/2022/11/30/4311893/3-5.jpg";
@@ -33,11 +32,8 @@ const Сard = ({
     return format(new Date(data), "MMMM d, yyyy");
   };
 
-  const hiddenText =
-    overview.length > 200
-      ? overview.slice(0, overview.indexOf(" ", 100)) + "..."
-      : overview;
-  const noDescription = overview.length === 0 ? "Нет описания" : hiddenText;
+  const hiddenText = overview.length > 19 ? overview.slice(0, overview.indexOf(' ', 100)) + '...' : overview
+  const noDescription = overview.length === 0 ? 'No description' : hiddenText;
 
   const bar = {
     none: "solid 2px #E90000",
@@ -79,12 +75,7 @@ const Сard = ({
       {loading ? (
         <Loading />
       ) : (
-        <img
-          src={showImage(poster_path)}
-          style={{ height: "281px" }}
-          alt={title}
-          className="movies__img"
-        />
+        <img src={showImage(poster_path)} alt={title} className="movies__img" />
       )}
       <div className="movies__description">
         <h5 className="movies__name">{original_title || title}</h5>
@@ -96,7 +87,7 @@ const Сard = ({
         </div>
         <p className="movies__date">{formatData(release_date)}</p>
         <p className="movies__jenres">{getRightGenres}</p>
-        <p className="movies__intro">{hiddenText}</p>
+        <p className="movies__intro">{noDescription}</p>
         <RatedList id={id} />
       </div>
     </li>

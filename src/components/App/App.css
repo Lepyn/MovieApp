@@ -1,0 +1,17 @@
+#root {
+    max-width: 1010px;
+    margin: 0 auto;
+    font-family: "Inter", "Arial", sans-serif;
+  }
+
+@media screen and (max-width: 720px) {
+    #root {
+      width: 420px;
+    }
+    .app {
+      width: 420px;
+      padding: 0 16px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+}

@@ -1,8 +1,8 @@
+import { useEffect, useState } from "react";
+import "../../style";
 import MovieList from "../MoviesList/MovieList";
 import MainHeader from "../MainHeader/MainHeader";
 import RatedPage from "../Page/RatedPage/RatedPage";
-import "../../style";
-import { useEffect, useState } from "react";
 import Context from "../../Context/Context";
 import movieDataBase from "../../Services/movieDataBase";
 
