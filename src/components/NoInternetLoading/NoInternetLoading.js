@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import { Alert } from 'antd'
 
@@ -17,7 +18,12 @@ const NoInternetLoading = () => {
   if (isOnline) {
     return null
   }
-  return <Alert message="No Internet Connection. Please cost some internet and try load again later." type="warning" />
+  return (
+    <Alert
+      message="No Internet Connection. Please cost some internet and try load again later."
+      type="warning"
+    />
+  )
 }
 
 export default NoInternetLoading

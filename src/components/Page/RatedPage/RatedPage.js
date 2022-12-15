@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useEffect, useState } from 'react'
 import MovieCard from '../../MoviesCard/MovieCard'
 import movieDataBase from '../../../Services/movieDataBase'
@@ -9,21 +10,19 @@ function RatedPage() {
   const [isLoading, setLoading] = useState(true)
 
   let localgest = localStorage.getItem('guest')
-  const res = movieDataBase.get(`/guest_session/${localgest}/rated/movies`)
 
-  const result = () => {
-    res.then((el) => {
+  const getGuestSession = movieDataBase.get(
+    `/guest_session/${localgest}/rated/movies`,
+  )
+
+  useEffect(() => {
+    getGuestSession.then((el) => {
       const str = JSON.stringify(el.data.results)
       localStorage.setItem('str', str)
       setRatedList(el.data.results)
       setLoading(false)
     })
-  }
-
-  useEffect(() => {
-    result()
   }, [])
-
   return (
     <>
       <NoInternetLoading />

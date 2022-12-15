@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Spin } from 'antd'
 
 const Loading = () => {
