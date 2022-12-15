@@ -78,7 +78,7 @@ const MovieList = () => {
                 total_pages={totalPage}
                 current={page}
                 onChange={(newPage) => {
-                  search(searchMovieValue, newPage)
+                  searchResult(searchMovieValue, newPage)
                 }}
               />
             </>
